@@ -1,0 +1,6 @@
+Version 1.0 (unnumbered)
+January 19 2023
+
+Version 1.1
+January 20 2023
+Added support for mathematical constants e, pi, and tau
