@@ -1,5 +1,7 @@
 // THIS PROGRAM RELEASED INTO THE PUBLIC DOMAIN UNDER CREATIVE COMMONS ZERO 1.0 UNIVERSAL PUBLIC DOMAIN DEDICATION
 // VERSION: 1.1
+// Changes from (unnumbered) version 1.0:
+// Added support for mathematical constants e, pi, and tau (2*pi)
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
