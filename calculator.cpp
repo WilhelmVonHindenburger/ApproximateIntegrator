@@ -11,6 +11,7 @@ int main(){
     string func=""; //Where the function will be
     char rule='\0'; //Which rule is used
     cout << "Enter the function you want an approximate integral of, in C++ code. Use the variable name x (lowercase).\n(using the cmath library is allowed)\n";
+    cout << "Three mathematical constants can be used: M_E (e, 2.71828...), M_PI (pi, 3.14159...), and M_TAU (tau = 2*pi, or 6.28318...)\n"
     cout << "The function will be placed into another file looking like this:\n\n";
     cout << "double func(double x){\n  double out=%s;\n  return out;\n}\n\n";
     cout << "Where %s contains the text of your function.\n";
@@ -35,6 +36,9 @@ int main(){
         out << "#include <iostream>\n";
         out << "#include <cmath>\n";
         out << "using namespace std;\n";
+        out << "const double M_E=2.718281828459045235360;\n";
+        out << "const double M_PI=3.14159265358979323846264338327950;\n";
+        out << "const double M_TAU=6.28318530717958647692528;\n";
         out << "double func(double x){\n";
         out << "  double out=" << func << ";\n";
         out << "  return out;\n";
@@ -58,6 +62,9 @@ int main(){
         out << "#include <iostream>\n";
         out << "#include <cmath>\n";
         out << "using namespace std;\n";
+        out << "const double M_E=2.718281828459045235360;\n";
+        out << "const double M_PI=3.14159265358979323846264338327950;\n";
+        out << "const double M_TAU=6.28318530717958647692528;\n";
         out << "double func(double x){\n";
         out << "  double out=" << func << ";\n";
         out << "  return out;\n";
@@ -81,6 +88,9 @@ int main(){
         out << "#include <iostream>\n";
         out << "#include <cmath>\n";
         out << "using namespace std;\n";
+        out << "const double M_E=2.718281828459045235360;\n";
+        out << "const double M_PI=3.14159265358979323846264338327950;\n";
+        out << "const double M_TAU=6.28318530717958647692528;\n";
         out << "double func(double x){\n";
         out << "  double out=" << func << ";\n";
         out << "  return out;\n";
@@ -104,6 +114,9 @@ int main(){
         out << "#include <iostream>\n";
         out << "#include <cmath>\n";
         out << "using namespace std;\n";
+        out << "const double M_E=2.718281828459045235360;\n";
+        out << "const double M_PI=3.14159265358979323846264338327950;\n";
+        out << "const double M_TAU=6.28318530717958647692528;\n";
         out << "double func(double x){\n";
         out << "  double out=" << func << ";\n";
         out << "  return out;\n";
@@ -131,6 +144,9 @@ int main(){
         out << "#include <iostream>\n";
         out << "#include <cmath>\n";
         out << "using namespace std;\n";
+        out << "const double M_E=2.718281828459045235360;\n";
+        out << "const double M_PI=3.14159265358979323846264338327950;\n";
+        out << "const double M_TAU=6.28318530717958647692528;\n";
         out << "double func(double x){\n";
         out << "  double out=" << func << ";\n";
         out << "  return out;\n";
