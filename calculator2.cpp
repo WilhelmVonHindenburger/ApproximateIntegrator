@@ -1,5 +1,5 @@
 // THIS PROGRAM RELEASED INTO THE PUBLIC DOMAIN UNDER CREATIVE COMMONS ZERO 1.0 UNIVERSAL PUBLIC DOMAIN DEDICATION
-// VERSION: 2.0-dev
+// VERSION: 2.0-dev1
 #include <iostream>
 #include <cmath>
 using namespace std;
