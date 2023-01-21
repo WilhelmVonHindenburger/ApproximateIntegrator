@@ -1,10 +1,10 @@
 // THIS PROGRAM RELEASED INTO THE PUBLIC DOMAIN UNDER CREATIVE COMMONS ZERO 1.0 UNIVERSAL PUBLIC DOMAIN DEDICATION
-// VERSION: 2.0
+// VERSION: 2.0-dev
 #include <iostream>
 #include <cmath>
 using namespace std;
-const double M_E=2.718281828459045235360;
-const double M_PI=3.14159265358979323846264338327950;
+//const double M_E=2.718281828459045235360;
+//const double M_PI=3.14159265358979323846264338327950;
 const double M_TAU=6.28318530717958647692528;
 //LEFT HAND RULE
 template <typename Func>double LHR(double a,double b,int n, Func func){
@@ -50,6 +50,22 @@ template <typename Func>double TR(double a,double b,int n, Func func){
 template <typename Func>double SR(double a,double b,int n, Func func){
     return (TR(a,b,n,func)/3)+(MR(a,b,n,func)*(2/3));
 }
+
+//EVALUATOR
+struct Expression{
+    char op;
+    Expression* l;
+    Expression* r;
+}
+
+Expression parse(string func){
+    // OH NO THE PARSER
+}
+
+double evalaute (Expression func){
+    //EVALUTE PARSED EXPRESSION
+}
+
 int main(){
     double a,b; //Endpoints of integration
     int n; //Number of sections
@@ -57,7 +73,7 @@ int main(){
     char rule='\0'; //Which rule is used
     double integral; //Final integral
     cout << "Enter the function you want an approximate integral of, in C++ code. Use the variable name x (lowercase).\n(using the cmath library is allowed)\n";
-    cout << "Three mathematical constants can be used: M_E (e, 2.71828...), M_PI (pi, 3.14159...), and M_TAU (tau = 2*pi, or 6.28318...)\n"
+    cout << "Three mathematical constants can be used: M_E (e, 2.71828...), M_PI (pi, 3.14159...), and M_TAU (tau = 2*pi, or 6.28318...)\n";
     cout << "The function will be placed into another file looking like this:\n\n";
     cout << "double func(double x){\n  double out=%s;\n  return out;\n}\n\n";
     cout << "Where %s contains the text of your function.\n";
