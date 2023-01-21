@@ -4,3 +4,14 @@ January 19 2023
 Version 1.1
 January 20 2023
 Added support for mathematical constants e, pi, and tau
+
+Version 1.2
+January 21 2023
+Removed declarations of e and pi since they're already in cmath
+Made compiling and running new program manual to work across systems
+
+Version 2.0-dev1
+January 21 2023
+Rewriting program to not require a second file:
+Implemented usage of templates
+To do: Write parser and Evaluator
