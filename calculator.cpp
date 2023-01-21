@@ -1,16 +1,61 @@
 // THIS PROGRAM RELEASED INTO THE PUBLIC DOMAIN UNDER CREATIVE COMMONS ZERO 1.0 UNIVERSAL PUBLIC DOMAIN DEDICATION
-// VERSION: 1.1
+// VERSION: 2.0
 #include <iostream>
-#include <fstream>
-#include <cstdlib>
 #include <cmath>
 using namespace std;
-ofstream out;
+const double M_E=2.718281828459045235360;
+const double M_PI=3.14159265358979323846264338327950;
+const double M_TAU=6.28318530717958647692528;
+//LEFT HAND RULE
+template <typename Func>double LHR(double a,double b,int n, Func func){
+    double dx=(b-a)/n;
+    double output;
+    for(int i=0; i<n; i++){
+        output += func(a+(i*dx));
+    }
+    output *= dx;
+    return output;
+}
+//RIGHT HAND RULE
+template <typename Func>double RHR(double a,double b,int n, Func func){
+    double dx=(b-a)/n;
+    double output;
+    for(int i=1; i<=n; i++){
+        output += func(a+(i*dx));
+    }
+    output *= dx;
+    return output;
+}
+//MIDPOINT RULE
+template <typename Func>double MR(double a,double b,int n, Func func){
+    double dx=(b-a)/n;
+    double output;
+    for(int i=0; i<n; i++){
+        output += func(a+((i+0.5)*dx));
+    }
+    output *= dx;
+    return output;
+}
+//TREAPEZOID RULE
+template <typename Func>double TR(double a,double b,int n, Func func){
+    double dx=(b-a)/n;
+    double output;
+    for(int i=0; i<n; i++){
+        output += (func(a+(i*dx))+func(a+((i+1)*dx)));
+    }
+    output *= (dx/2);
+    return output;
+}
+//SIMPSON RULE
+template <typename Func>double SR(double a,double b,int n, Func func){
+    return (TR(a,b,n,func)/3)+(MR(a,b,n,func)*(2/3));
+}
 int main(){
     double a,b; //Endpoints of integration
     int n; //Number of sections
     string func=""; //Where the function will be
     char rule='\0'; //Which rule is used
+    double integral; //Final integral
     cout << "Enter the function you want an approximate integral of, in C++ code. Use the variable name x (lowercase).\n(using the cmath library is allowed)\n";
     cout << "Three mathematical constants can be used: M_E (e, 2.71828...), M_PI (pi, 3.14159...), and M_TAU (tau = 2*pi, or 6.28318...)\n"
     cout << "The function will be placed into another file looking like this:\n\n";
@@ -30,149 +75,35 @@ int main(){
     cin >> rule;
     cout << "How many intervals to split this into? (Must be even if Simpson's rule chosen)\n";
     cin >> n;
-    out.open("calc.cpp");
     switch(rule){
-        case 'L': //Left-hand rule
+        case 'L': //LEFT HAND RULE
         case 'l':
-        out << "#include <iostream>\n";
-        out << "#include <cmath>\n";
-        out << "using namespace std;\n";
-        out << "const double M_E=2.718281828459045235360;\n";
-        out << "const double M_PI=3.14159265358979323846264338327950;\n";
-        out << "const double M_TAU=6.28318530717958647692528;\n";
-        out << "double func(double x){\n";
-        out << "  double out=" << func << ";\n";
-        out << "  return out;\n";
-        out << "}\n";
-        out << "int main(){\n";
-        out << "  double a=" << a << ";\n";
-        out << "  double b=" << b << ";\n";
-        out << "  int n=" << n << ";\n";
-        out << "  double dx=(b-a)/n;\n";
-        out << "  double output;\n";
-        out << "  for(int i=0; i<n; i++){\n";
-        out << "    output += func(a+(i*dx));\n";
-        out << "  }\n";
-        out << "  output *= dx;\n";
-        out << "  cout << output << endl;\n";
-        out << "  return 0;\n";
-        out << "}\n";
-        break;
-        case 'R': //Right-hand rule
+            integral=LHR(a, b, n, func);
+            break;
+        case 'R':
         case 'r':
-        out << "#include <iostream>\n";
-        out << "#include <cmath>\n";
-        out << "using namespace std;\n";
-        out << "const double M_E=2.718281828459045235360;\n";
-        out << "const double M_PI=3.14159265358979323846264338327950;\n";
-        out << "const double M_TAU=6.28318530717958647692528;\n";
-        out << "double func(double x){\n";
-        out << "  double out=" << func << ";\n";
-        out << "  return out;\n";
-        out << "}\n";
-        out << "int main(){\n";
-        out << "  double a=" << a << ";\n";
-        out << "  double b=" << b << ";\n";
-        out << "  int n=" << n << ";\n";
-        out << "  double dx=(b-a)/n;\n";
-        out << "  double output;\n";
-        out << "  for(int i=1; i<=n; i++){\n";
-        out << "    output += func(a+(i*dx));\n";
-        out << "  }\n";
-        out << "  output *= dx;\n";
-        out << "  cout << output << endl;\n";
-        out << "  return 0;\n";
-        out << "}\n";
-        break;
-        case 'M': //Midpoint rule
+            integral=RHR(a,b,n,func);
+            break;
+        case 'M':
         case 'm':
-        out << "#include <iostream>\n";
-        out << "#include <cmath>\n";
-        out << "using namespace std;\n";
-        out << "const double M_E=2.718281828459045235360;\n";
-        out << "const double M_PI=3.14159265358979323846264338327950;\n";
-        out << "const double M_TAU=6.28318530717958647692528;\n";
-        out << "double func(double x){\n";
-        out << "  double out=" << func << ";\n";
-        out << "  return out;\n";
-        out << "}\n";
-        out << "int main(){\n";
-        out << "  double a=" << a << ";\n";
-        out << "  double b=" << b << ";\n";
-        out << "  int n=" << n << ";\n";
-        out << "  double dx=(b-a)/n;\n";
-        out << "  double output;\n";
-        out << "  for(int i=0; i<n; i++){\n";
-        out << "    output += func(a+((i+0.5)*dx));\n";
-        out << "  }\n";
-        out << "  output *= dx;\n";
-        out << "  cout << output << endl;\n";
-        out << "  return 0;\n";
-        out << "}\n";
-        break;
-        case 'T': //Trapezoid rule
+            integral=MR(a,b,n,func);
+            break;
+        case 'T':
         case 't':
-        out << "#include <iostream>\n";
-        out << "#include <cmath>\n";
-        out << "using namespace std;\n";
-        out << "const double M_E=2.718281828459045235360;\n";
-        out << "const double M_PI=3.14159265358979323846264338327950;\n";
-        out << "const double M_TAU=6.28318530717958647692528;\n";
-        out << "double func(double x){\n";
-        out << "  double out=" << func << ";\n";
-        out << "  return out;\n";
-        out << "}\n";
-        out << "int main(){\n";
-        out << "  double a=" << a << ";\n";
-        out << "  double b=" << b << ";\n";
-        out << "  int n=" << n << ";\n";
-        out << "  double dx=(b-a)/n;\n";
-        out << "  double output;\n";
-        out << "  for(int i=0; i<n; i++){\n";
-        out << "    output += (func(a+(i*dx))+func(a+((i+1)*dx)));\n";
-        out << "  }\n";
-        out << "  output *= (dx/2);\n";
-        out << "  cout << output << endl;\n";
-        out << "  return 0;\n";
-        out << "}\n";
-        break;
-        case 'S': //Simpson's rule
+            integral=TR(a,b,n,func);
+            break;
+        case 'S':
         case 's':
-        if(fmod(n,2)){
-            cout << "The number of divisions must be even for Simpson's rule.\n";
-            return 1;
-        }
-        out << "#include <iostream>\n";
-        out << "#include <cmath>\n";
-        out << "using namespace std;\n";
-        out << "const double M_E=2.718281828459045235360;\n";
-        out << "const double M_PI=3.14159265358979323846264338327950;\n";
-        out << "const double M_TAU=6.28318530717958647692528;\n";
-        out << "double func(double x){\n";
-        out << "  double out=" << func << ";\n";
-        out << "  return out;\n";
-        out << "}\n";
-        out << "int main(){\n";
-        out << "  double a=" << a << ";\n";
-        out << "  double b=" << b << ";\n";
-        out << "  int n=" << n/2 << ";\n"; //A weighted average of Midpoint and Trapezoid with n/2 divisions is equal to Simpson with n divisions
-        out << "  double dx=(b-a)/n;\n";
-        out << "  double output;\n";
-        out << "  for(int i=0; i<n; i++){\n";
-        out << "    output += dx*(func(a+(i*dx))+func(a+((i+1)*dx)))/2;\n";
-        out << "    output +=dx*func(a+((i+0.5)*dx))*2;\n";
-        out << "  }\n";
-        out << "  output /= 3;\n";
-        out << "  cout << output << endl;\n";
-        out << "  return 0;\n";
-        out << "}\n";
-        break;
+            if(fmod(n,2)){
+                cerr << "The number of divisions must be even for Simpson's rule.\n";
+                return 1;
+            }
+            integral=SR(a,b,n/2,func);
+            break;
         default:
-        cout << "Not a valid input.\n";
-        return 1;
+            cerr << "Not a valid input.\n";
+            return 1;
     }
-    out.close();
-    system("g++ calc.cpp -o calc"); //Compile and run the program created
-    system("./calc");
+    cout << integral << endl;
     return 0;
 }
