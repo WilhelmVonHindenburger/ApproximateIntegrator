@@ -12,7 +12,7 @@ int main(){
     string func=""; //Where the function will be
     char rule='\0'; //Which rule is used
     cout << "Enter the function you want an approximate integral of, in C++ code. Use the variable name x (lowercase).\n(using the cmath library is allowed)\n";
-    cout << "In addition to the mathematical constants in the cmath library, you can also use M_TAU (tau = 2*pi, or 6.28318...)\n"
+    cout << "In addition to the mathematical constants in the cmath library, you can also use M_TAU (tau = 2*pi, or 6.28318...)\n";
     cout << "The function will be placed into another file looking like this:\n\n";
     cout << "double func(double x){\n  double out=%s;\n  return out;\n}\n\n";
     cout << "Where %s contains the text of your function.\n";
